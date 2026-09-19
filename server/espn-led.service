@@ -1,0 +1,23 @@
+# Install on the server:
+#   sudo cp espn-led.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now espn-led
+# Logs: journalctl -u espn-led -f
+#
+# Adjust User, WorkingDirectory and ExecStart to match where you cloned the repo
+# and where your virtualenv lives.
+
+[Unit]
+Description=ESPN Fantasy LED Board server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/ESPN-Fantasy-LED-Board/server
+ExecStart=/home/ubuntu/ESPN-Fantasy-LED-Board/.venv/bin/python app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
