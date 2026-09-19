@@ -3,7 +3,11 @@ import os
 import threading
 import time
 from datetime import datetime
-from zoneinfo import ZoneInfo
+
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:  # Python 3.8
+    from backports.zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify
